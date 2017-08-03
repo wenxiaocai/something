@@ -28,3 +28,9 @@ background: linear-gradient(to bottom, #4b7199 0%, #5a82a9 40%, #98c8ea 100%);
 .flex{display:-webkit-box!important;display:-webkit-flex!important;display:-ms-flexbox!important;display:flex!important;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}
 .flex>.cell{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;width:0;-webkit-flex-basis:0;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%;display:block;    /*padding: 0!important;*/position:relative}
 .flex>.cell.fixed{-webkit-box-flex:0!important;-webkit-flex:none!important;-ms-flex:none!important;flex:none!important;width:auto}
+
+/*截字*/
+.lineClamp1,.lineClamp2,.lineClamp3,.lineClamp4{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
+.lineClamp2{-webkit-line-clamp:2;}
+.lineClamp3{-webkit-line-clamp:3;}
+.lineClamp4{-webkit-line-clamp:4;}
