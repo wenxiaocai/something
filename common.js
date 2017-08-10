@@ -12,3 +12,13 @@ $('.fixMenu li a ').click(function() {
     }, 1000);
     return false;
 });
+
+// 字号
+function placeholderPic() {
+    var w = document.documentElement.offsetWidth;
+    document.documentElement.style.fontSize = w / 20 + 'px';
+}
+placeholderPic();
+window.onresize = function() {
+    placeholderPic();
+}
