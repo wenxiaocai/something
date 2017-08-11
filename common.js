@@ -22,3 +22,30 @@ placeholderPic();
 window.onresize = function() {
     placeholderPic();
 }
+
+
+// 移动端判断是否双击
+var lastClickTime = 0,
+    clickTimer;
+$('body')
+    .on('click', 'h1', function() {
+
+        var oHeight = $('#J-header').height();
+        $('html,body').animate({
+            scrollTop: 0
+        }, 800);
+        var nowTime = new Date().getTime();
+        if (nowTime - lastClickTime < 400) {
+            /*双击*/
+            lastClickTime = 0;
+            clickTimer && clearTimeout(clickTimer);
+            alert('双击');
+
+        } else {
+            /*单击*/
+            lastClickTime = nowTime;
+            clickTimer = setTimeout(() => {
+                alert('单击');
+            }, 400);
+        }
+    })
