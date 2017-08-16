@@ -92,3 +92,13 @@ git push -u origin master
 git remote rm origin
 git remote add origin [url]
 #3.直接修改config文件
+
+
+
+
+#vue test
+npm init
+npm install webpack --save--dev
+vue init webpack (此处可带项目距名称，即会使用该名称创建新项目)
+npm install 
+npm run dev
