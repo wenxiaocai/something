@@ -64,3 +64,17 @@ function ltrim(str) {　　
 function rtrim(str) {　　
     return str.replace(/(\s*$)/g, "");　　
 }
+
+// 获取鼠标位置
+var oMouseX = event.originalEvent.x || event.originalEvent.layerX || 0; 
+var oMouseY = event.originalEvent.y || event.originalEvent.layerY || 0; 
+
+
+
+$('.txt').on('keypress', function(event) {
+    var ee = event || window.event;
+    if (ee.keyCode == "13") {
+        console.log("enter");
+
+    }
+});
