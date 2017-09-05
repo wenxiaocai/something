@@ -26,7 +26,7 @@ window.onresize = function() {
 
 var RegEmail = /^([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 var RegPhone = /^1[3|4|5|7|8]\d{9}$/;
-var RegPst = /^(?![a-zA-z]+$)(?!\d+$)(?![!+@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
+var RegPsw = /^(?![a-zA-z]+$)(?!\d+$)(?![!+@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
 
 
 
@@ -66,8 +66,8 @@ function rtrim(str) {　　
 }
 
 // 获取鼠标位置
-var oMouseX = event.originalEvent.x || event.originalEvent.layerX || 0; 
-var oMouseY = event.originalEvent.y || event.originalEvent.layerY || 0; 
+var oMouseX = event.originalEvent.x || event.originalEvent.layerX || 0;
+var oMouseY = event.originalEvent.y || event.originalEvent.layerY || 0;
 
 
 
@@ -78,3 +78,20 @@ $('.txt').on('keypress', function(event) {
 
     }
 });
+
+// 页面到底部自动加载内容 
+var divH = document.body.scrollHeight,
+    top = document.body.scrollTop,
+    windowH = window.screen.availHeight;
+if ((top + windowH) > divH) {
+    console.log('该他妈的加载内容了。');
+}
+console.log('网页正文全文高：' + document.body.scrollHeight + ' 网页被卷去的高： ' + document.body.scrollTop + ' 屏幕可用工作区高度:' + window.screen.availHeight);
+
+// 保留指定小数位数
+var num = 2.443242342;
+num = num.toFixed(4); // num will be equal to   2.4432
+
+
+// 图片加载失败，并防止死循环
+onerror = "this.src=aaa.jpg;this.onerror=null;"
