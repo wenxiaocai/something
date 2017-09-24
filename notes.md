@@ -102,3 +102,12 @@ npm install webpack --save-dev
 vue init webpack (此处可带项目距名称，即会使用该名称创建新项目)
 npm install 
 npm run dev
+
+
+#SublimeHttpRequester (ctrl+alt+r)
+/*
+	POST http://posttestserver.com/post.php
+	Content-type: application/x-www-form-urlencoded
+	POST_BODY:
+	variable1=avalue&variable2=1234&variable3=anothervalue
+*/
