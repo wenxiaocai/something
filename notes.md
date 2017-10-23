@@ -104,6 +104,7 @@ npm install
 npm run dev
 
 
+<<<<<<< HEAD
 #使用如下命令可以查看远程仓库（我这里有一个origin仓库） 
 git remote -v
 
@@ -118,3 +119,12 @@ git merge temp
 
 #删除temp分支
 git branch -d temp
+=======
+#SublimeHttpRequester (ctrl+alt+r)
+/*
+	POST http://posttestserver.com/post.php
+	Content-type: application/x-www-form-urlencoded
+	POST_BODY:
+	variable1=avalue&variable2=1234&variable3=anothervalue
+*/
+>>>>>>> 1e3fbf35c6fa1db3fbf9d2754e82775e8b212878
