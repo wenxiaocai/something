@@ -1,3 +1,44 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="renderer" content="webkit">
 <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+
+<!-- video h5 -->
+<style>
+.h5-layer-conatiner {
+    position: relative;
+}
+
+.h5-layer-conatiner .m-videoMask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(250, 0, 0, .5);
+    z-index: 999;
+}
+</style>
+<div class="container">
+    <div class="h5-layer-conatiner">
+        <div id="J-videoMask" class="m-videoMask"></div>
+        <video id="video" preload="metadata" controls="controls" src="http://k.youku.com/player/getFlvPath/sid/050873769322612be59a5/st/mp4/fileid/03000801005887889B1951000000016065C567-7768-FD2D-1648-864698879433?k=83877bb67ed0064c24132f41&amp;hd=1&amp;myp=0&amp;ts=195&amp;ctype=12&amp;ev=1&amp;token=0534&amp;oip=2030751054&amp;ep=cieUEk6OUcgJ5iHdjj8bNXnnfSYKXP4J9h%2BFidJjALshQOC4kTbYtZy5S%2F5CFvkZciIGEe3xrdWU%0Ab0YTYfdEr2AQqTqqTfrh%2BPTr5aVVwJYJbhExe8nUt1SeRjP1&amp;ccode=050F&amp;duration=195&amp;expire=18000&amp;psid=38e86e01594bc5eb3fd63dcf37f19a4e&amp;ups_client_netip=121.10.205.78&amp;ups_ts=1508737693&amp;ups_userid=&amp;utid=gWjTEc80PGECAXkKzU5Bg6%2Bu&amp;vid=XMjMyMTY1NjQ4NA%3D%3D&amp;vkey=A675e9ba27c0a57e9b892532238dcb653" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0);"></video>
+    </div>
+</div>
+<script>
+var video = document.getElementById("video");
+
+$(function() {
+    $('#J-videoMask').on('click', function() {
+        console.log('dd');
+        if (video.canPlayType) {
+            // function play() {
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+            // }
+        }
+    })
+})
+</script>

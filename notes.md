@@ -102,3 +102,19 @@ npm install webpack --save-dev
 vue init webpack (此处可带项目距名称，即会使用该名称创建新项目)
 npm install 
 npm run dev
+
+
+#使用如下命令可以查看远程仓库（我这里有一个origin仓库） 
+git remote -v
+
+#从远程获取最新版本到本地
+git fetch origin master:temp
+
+#比较本地仓库与下载的temp分支
+git diff temp
+
+#合并temp分支到本地的master分支
+git merge temp
+
+#删除temp分支
+git branch -d temp
