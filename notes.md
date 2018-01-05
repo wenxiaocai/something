@@ -127,4 +127,11 @@ git branch -d temp
 	POST_BODY:
 	variable1=avalue&variable2=1234&variable3=anothervalue
 */
->>>>>>> 1e3fbf35c6fa1db3fbf9d2754e82775e8b212878
+
+
+
+#所谓“同源”指的是”三个相同“。
+
+协议相同
+域名相同
+端口相同
