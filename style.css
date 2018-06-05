@@ -1,49 +1,416 @@
 /* reset */
-html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
-header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
-table{border-collapse:collapse;border-spacing:0;}
-caption,th{text-align:left;font-weight:normal;}
-html,body,fieldset,img,iframe,abbr{border:0;}
-i,cite,em,var,address,dfn{font-style:normal;}
-[hidefocus],summary{outline:0;}
-li{list-style:none;}
 
-/*h1,h2,h3,h4,h5,h6,small{font-size:100%;}*/
-sup,sub{font-size:83%;}
-pre,code,kbd,samp{font-family:inherit;}
-q:before,q:after{content:none;}
-textarea{overflow:auto;resize:none;}
-label,summary{cursor:default;}
-a,button{cursor:pointer;}
-h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:normal;}
-del,ins,u,s,a,a:hover{text-decoration:none;}
-body,textarea,input,button,select,keygen,legend{font:12px/1.14 "Microsoft Yahei";color:#333;outline:0;vertical-align:middle;outline:0;}
-body{background:#fff;}
-a,a:hover{color:inherit;}
-img{vertical-align:middle;}
-input[type="text"],textarea{-webkit-appearance:none;border-radius:0;}
-input[type="text"],input[type="button"],input[type="submit"],input[type="number"]{-webkit-appearance:none;outline:none;border:none;}
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+    margin: 0;
+    padding: 0;
+}
+
+header,
+footer,
+section,
+article,
+aside,
+nav,
+hgroup,
+address,
+figure,
+figcaption,
+menu,
+details {
+    display: block;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+caption,
+th {
+    text-align: left;
+    font-weight: normal;
+}
+
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+    border: 0;
+}
+
+i,
+cite,
+em,
+var,
+address,
+dfn {
+    font-style: normal;
+}
+
+[hidefocus],
+summary {
+    outline: 0;
+}
+
+li {
+    list-style: none;
+}
+
+sup,
+sub {
+    font-size: 83%;
+}
+
+pre,
+code,
+kbd,
+samp {
+    font-family: inherit;
+}
+
+q:before,
+q:after {
+    content: none;
+}
+
+textarea {
+    overflow: auto;
+    resize: none;
+}
+
+label,
+summary {
+    cursor: default;
+}
+
+a,
+button {
+    cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+strong,
+b {
+    font-weight: normal;
+}
+
+del,
+ins,
+u,
+s,
+a,
+a:hover {
+    text-decoration: none;
+}
+
+body,
+textarea,
+input,
+button,
+select,
+keygen,
+legend {
+    font: 12px/1.14 "Microsoft Yahei";
+    color: #333;
+    outline: 0;
+    vertical-align: middle;
+    outline: 0;
+}
+
+body {
+    background: #fff;
+}
+
+a,
+a:hover {
+    color: inherit;
+}
+
+img {
+    vertical-align: middle;
+}
+
+input[type="text"],
+textarea {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+input[type="number"] {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+}
+
 
 /*居中*/
-.flex-center{display:-webkit-box;display:-moz-box;display:-ms-flexbox;display:-webkit-flex;display:flex;-webkit-box-align:center;-moz-box-align:center;-ms-flex-align:center;-webkit-align-items:center;align-items:center;-webkit-box-pack:center;-moz-box-pack:center;-ms-flex-pack:center;-webkit-justify-content:center;justify-content:center;}
+
+.flex-center {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
 
 /*background-linear-gradient by apple.com*/
 
-background:-webkit-linear-gradient(top,#4b7199 0%,#5a82a9 40%,#98c8ea 100%);background:linear-gradient(to bottom,#4b7199 0%,#5a82a9 40%,#98c8ea 100%);
+background:-webkit-linear-gradient(top, #4b7199 0%, #5a82a9 40%, #98c8ea 100%);
+background:linear-gradient(to bottom, #4b7199 0%, #5a82a9 40%, #98c8ea 100%);
+
 
 /*flex*/
-.flex{display:-webkit-box!important;display:-webkit-flex!important;display:-ms-flexbox!important;display:flex!important;-webkit-flex-wrap:wrap;-ms-flex-wrap:wrap;flex-wrap:wrap}
-.flex>.cell{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;width:0;-webkit-flex-basis:0;-ms-flex-preferred-size:0;flex-basis:0;max-width:100%;display:block;    /*padding: 0!important;*/position:relative}
-.flex>.cell.fixed{-webkit-box-flex:0!important;-webkit-flex:none!important;-ms-flex:none!important;flex:none!important;width:auto}
+
+.flex {
+    display: -webkit-box!important;
+    display: -webkit-flex!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.flex>.cell {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    max-width: 100%;
+    display: block;
+    /*padding: 0!important;*/
+    position: relative
+}
+
+.flex>.cell.fixed {
+    -webkit-box-flex: 0!important;
+    -webkit-flex: none!important;
+    -ms-flex: none!important;
+    flex: none!important;
+    width: auto
+}
+
 
 /*截字*/
 
-overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-.lineClamp1,.lineClamp2,.lineClamp3,.lineClamp4{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;}
-.lineClamp2{-webkit-line-clamp:2;}
-.lineClamp3{-webkit-line-clamp:3;}
-.lineClamp4{-webkit-line-clamp:4;}
--webkit-backface-visibility:hidden;-webkit-transform-style:preserve-3d;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+.lineClamp1,
+.lineClamp2,
+.lineClamp3,
+.lineClamp4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.lineClamp2 {
+    -webkit-line-clamp: 2;
+}
+
+.lineClamp3 {
+    -webkit-line-clamp: 3;
+}
+
+.lineClamp4 {
+    -webkit-line-clamp: 4;
+}
+
+-webkit-backface-visibility:hidden;
+-webkit-transform-style:preserve-3d;
 
 /*禁止选中文字*/
--moz-user-select:none;-webkit-user-select:none;user-select:none;
+
+-moz-user-select:none;
+-webkit-user-select:none;
+user-select:none;
+
+/*字体 英文 细*/
+
+font:16px/135% 'Roboto',
+sans-serif
+/*渐变*/
+
+background:-moz-linear-gradient(top, #000000 0%, #ffffff 100%);
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, #ffffff));
+background:-webkit-linear-gradient(top, #000000 0%, #ffffff 100%);
+background:-o-linear-gradient(top, #000000 0%, #ffffff 100%);
+background:-ms-linear-gradient(top, #000000 0%, #ffffff 100%);
+background:linear-gradient(to bottom, #000000 0%, #ffffff 100%);
+只遵循横向顺序即可，先显示定位布局类属性，后盒模型等自身属性，最后是文本类及修饰类属性。 → 显示属性 自身属性 文本属性和其他修饰 display width font visibility height text-align position margin text-decoration float padding vertical-align clear border white-space list-style overflow color top min-width background CSS3 blur滤镜实现 .blur {
+    -webkit-filter: blur(10px);
+    /* Chrome, Opera */
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+
+/*禁止文字被鼠标选中 */
+
+moz-user-select:-moz-none;
+-moz-user-select:none;
+-o-user-select:none;
+-khtml-user-select:none;
+-webkit-user-select:none;
+-ms-user-select:none;
+user-select:none;
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #999;
+    font-size: 16px;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #999;
+    font-size: 16px;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #999;
+    font-size: 16px;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: #999;
+    font-size: 16px;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.gray {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+
+    filter: grayscale(100%);
+
+    filter: gray;
+}
+
+
+@media screen and (max-width:1024px) {}
+
+
+
+/*取消a标签在移动端点击时的背景颜色*/
+
+
+/*一、取消a标签在移动端点击时的蓝色*/
+
+-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+-webkit-user-select: none;
+-moz-user-focus: none;
+-moz-user-select: none;
+
+
+
+/*二、使用图片作为a标签的点击按钮时，当触发touchstart的时候，往往会有一个灰色的背景*/
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:link,
+a:focus {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    background: none;
+    text-decoration: none;
+}
+
+
+
+/*三、改变选中内容的背景颜色*/
+
+::selection {
+    background: #FFF;
+    color: #333;
+}
+
+::-moz-selection {
+    background: #FFF;
+    color: #333;
+}
+
+::-webkit-selection {
+    background: #FFF;
+    color: #333;
+}
+
+
+/*　　四、去除ios input框点击时的灰色背景*/
+
+-webkit-tap-highlight-color:rgba(0, 0, 0, 0);

@@ -145,6 +145,41 @@ alert($(document).width()); //浏览器当前窗口文档对象宽度
 alert($(document.body).width()); //浏览器当前窗口文档body的高度 
 alert($(document.body).outerWidth(true)); //浏览器当前窗口文档body的总宽度 包括border padding margin 
 
+
+先介绍几个属性：（ 暂时只测了IE和firefox， 实际上我工作中用到的最多的是chrome）
+
+网页被卷起来的高度 / 宽度（ 即浏览器滚动条滚动后隐藏的页面内容高度）
+
+(javascript) document.documentElement.scrollTop //firefox
+
+(javascript) document.documentElement.scrollLeft //firefox
+
+(javascript) document.body.scrollTop //IE
+
+(javascript) document.body.scrollLeft //IE
+
+(jqurey) $(window).scrollTop()
+
+(jqurey) $(window).scrollLeft()
+
+网页工作区域的高度和宽度
+
+    (javascript) document.documentElement.clientHeight // IE firefox       
+
+(jqurey) $(window).height()
+
+元素距离文档顶端和左边的偏移值
+
+    (javascript) DOM元素对象.offsetTop //IE firefox
+
+(javascript) DOM元素对象.offsetLeft //IE firefox
+
+(jqurey) jq对象.offset().top
+
+(jqurey) jq对象.offset().left
+
+
+
 //回到顶部
 $('body,html').animate({ scrollTop: 0 }, 100);
 
@@ -202,6 +237,27 @@ console.log(new Date(2018, 0, 05, 14, 15, 00).getDate());
 console.log(new Date(2018, 0, 05, 14, 15, 00).getHours());
 console.log(new Date(2018, 0, 05, 14, 15, 00).getMinutes());
 console.log(new Date(2018, 0, 05, 14, 15, 00).getSeconds());
+
+js中获取时间new date() 的用法
+获取时间：
+
+var myDate = new Date(); //获取系统当前时间
+获取特定格式的时间：
+
+myDate.getYear(); //获取当前年份(2位)
+myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+myDate.getMonth(); //获取当前月份(0-11,0代表1月)
+myDate.getDate(); //获取当前日(1-31)
+myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
+myDate.getTime(); //获取当前时间(从1970.1.1开始的毫秒数)
+myDate.getHours(); //获取当前小时数(0-23)
+myDate.getMinutes(); //获取当前分钟数(0-59)
+myDate.getSeconds(); //获取当前秒数(0-59)
+myDate.getMilliseconds(); //获取当前毫秒数(0-999)
+myDate.toLocaleDateString(); //获取当前日期
+var mytime = myDate.toLocaleTimeString(); //获取当前时间
+myDate.toLocaleString(); //获取日期与时间
+
 
 // 获取当前时间戳(以s为单位)
 var timestamp = Date.parse(new Date());
@@ -268,8 +324,8 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
 // 公用方法
 /*#region myLoading*/
-(function ($) {
-    $.myLoading = function () {
+(function($) {
+    $.myLoading = function() {
         var defaults = {
             self_bgFrame: null, //背景层
             self: null //dialog dom
@@ -284,14 +340,15 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         options.self_bgFrame = $(tmp1).appendTo(window.document.body);
         options.self = $(tmp2).appendTo(window.document.body);
 
-  
+
         //var x = ($(window).width() - $(".ui_loading1").width()) / 2;
         //var y = ($(window).height() - $(".ui_loading1").height()) / 2;
         //$(options.self).css("left", x + "px");
         //$(options.self).css("top", y + "px");
 
 
-        if (!window.myTopLayoutIndex) window.myTopLayoutIndex = 100; else window.myTopLayoutIndex = window.myTopLayoutIndex + 1;
+        if (!window.myTopLayoutIndex) window.myTopLayoutIndex = 100;
+        else window.myTopLayoutIndex = window.myTopLayoutIndex + 1;
         options.self_bgFrame.css("z-index", window.myTopLayoutIndex);
         options.self.css("z-index", window.myTopLayoutIndex);
 
@@ -320,15 +377,15 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function createPlugin() {
         return {
             options: null,
-            init: function (options) {
+            init: function(options) {
                 this.options = options;
                 create(options);
                 return this;
             },
-            show: function () {
+            show: function() {
                 show(this.options);
             },
-            close: function () {
+            close: function() {
                 close(this.options);
             }
         }
@@ -337,8 +394,8 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 /*#endregion*/
 
 /*#region myDialog*/
-(function ($) {
-    $.myDialog = function (options) {
+(function($) {
+    $.myDialog = function(options) {
         var defaults = {
             id: this.attr("id"), //容器id
             self_bgFrame: null, //背景层
@@ -357,20 +414,21 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function create(options) {
         var tmp1 = '<div class="ui_dialog2_bgframe" data-type="dialog_bg_layout"></div>';
         var tmp2 = '<div class="ui_dialog2">' +
-                    '<div class="ui_dialog2_top">' +
-                        '<label class="ui_dialog2_title_txt" data-type="title">标题</label>' +
-                        '<span class="ui_dialog2_close_btn" title="关闭" data-type="close"></span>' +
-                    '</div>' +
-                    '<div class="ui_dialog2_body"></div>' +
-                    '<div class="ui_dialog2_bottom">' +
-                        '<div class="ui_dialog2_buttons" data-type="buttons"></div>' +
-                    '</div>' +
-                   '</div>';
+            '<div class="ui_dialog2_top">' +
+            '<label class="ui_dialog2_title_txt" data-type="title">标题</label>' +
+            '<span class="ui_dialog2_close_btn" title="关闭" data-type="close"></span>' +
+            '</div>' +
+            '<div class="ui_dialog2_body"></div>' +
+            '<div class="ui_dialog2_bottom">' +
+            '<div class="ui_dialog2_buttons" data-type="buttons"></div>' +
+            '</div>' +
+            '</div>';
 
         var op = options;
         options.self_bgFrame = $(tmp1).appendTo(window.document.body);
         options.self = $(tmp2).appendTo(window.document.body);
-        if (!window.myTopLayoutIndex) window.myTopLayoutIndex = 100; else window.myTopLayoutIndex = window.myTopLayoutIndex + 1;
+        if (!window.myTopLayoutIndex) window.myTopLayoutIndex = 100;
+        else window.myTopLayoutIndex = window.myTopLayoutIndex + 1;
         options.self_bgFrame.css("z-index", window.myTopLayoutIndex);
         options.self.css("z-index", window.myTopLayoutIndex);
 
@@ -402,21 +460,20 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         if (options.buttons.length > 0) {
             for (var i = 0; i < options.buttons.length; i++) {
                 var btn = options.buttons[i];
-                if (typeof (btn) == "string")
+                if (typeof(btn) == "string")
                     $("#" + btn).appendTo(btnContainer);
                 else
                     $(btnContainer).append(btn);
             }
-        }
-        else {
+        } else {
             $(btnContainer).css("display", "none");
         }
 
         var closeBtn = $(titlebar).find("[data-type='close']")[0];
-        $(closeBtn).click(function () {
+        $(closeBtn).click(function() {
             close(op);
         });
-        $(window).resize(function () {
+        $(window).resize(function() {
             var docw = $(document).width();
             var doch = $(document).height();
             $(op.self_bgFrame).width(docw);
@@ -452,18 +509,18 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function createPlugin() {
         return {
             options: null,
-            init: function (options) {
+            init: function(options) {
                 this.options = options;
                 create(options);
                 return this;
             },
-            show: function () {
+            show: function() {
                 show(this.options);
             },
-            close: function () {
+            close: function() {
                 close(this.options);
             },
-            setTitle: function (title) {
+            setTitle: function(title) {
                 this.options.title = title;
                 setTitle(this.options);
             }
@@ -473,8 +530,8 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 /*#endregion*/
 
 /*#region myAlert*/
-(function ($) {
-    $.myAlert = function (msg, options, callback) {
+(function($) {
+    $.myAlert = function(msg, options, callback) {
         var defaults = {
             self_bgFrame: null, //背景层
             self: null, //dialog dom
@@ -490,19 +547,20 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function create(options, callback) {
         var tmp1 = '<div class="ui_alert2_bgframe"></div>';
         var tmp2 = '<div class="ui_alert2">' +
-                    '<div class="ui_alert2_top">' +
-                        '<span class="ui_alert2_close_btn" title="关闭" data-type="close"></span>' +
-                    '</div>' +
-                    '<div class="ui_alert2_body"></div>' +
-                    '<div class="ui_alert2_bottom">' +
-                        '<button class="ui_alert2_ok" type="button" data-type="ok">知道了</button>' +
-                    '</div>' +
-                   '</div>';
+            '<div class="ui_alert2_top">' +
+            '<span class="ui_alert2_close_btn" title="关闭" data-type="close"></span>' +
+            '</div>' +
+            '<div class="ui_alert2_body"></div>' +
+            '<div class="ui_alert2_bottom">' +
+            '<button class="ui_alert2_ok" type="button" data-type="ok">知道了</button>' +
+            '</div>' +
+            '</div>';
 
         var op = options;
         options.self_bgFrame = $(tmp1).appendTo(window.document.body);
         options.self = $(tmp2).appendTo(window.document.body);
-        if (!window.myTopLayoutIndex) window.myTopLayoutIndex = 100; else window.myTopLayoutIndex = window.myTopLayoutIndex + 1;
+        if (!window.myTopLayoutIndex) window.myTopLayoutIndex = 100;
+        else window.myTopLayoutIndex = window.myTopLayoutIndex + 1;
         options.self_bgFrame.css("z-index", window.myTopLayoutIndex);
         options.self.css("z-index", window.myTopLayoutIndex);
 
@@ -521,20 +579,20 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         //title
         var closeBtn = $(titlebar).find("[data-type='close']")[0];
-        $(closeBtn).click(function () {
+        $(closeBtn).click(function() {
             if (callback != null && callback != undefined)
                 callback();
             close(options);
         });
 
         var okBtn = $(footbar).find("[data-type='ok']")[0];
-        $(okBtn).click(function () {
+        $(okBtn).click(function() {
             if (callback != null && callback != undefined)
                 callback();
             close(options);
         });
 
-        $(window).resize(function () {
+        $(window).resize(function() {
             var docw = $(document).width();
             var doch = $(document).height();
             $(options.self_bgFrame).width(docw);
@@ -568,15 +626,15 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function createPlugin() {
         return {
             options: null,
-            init: function (options, callback) {
+            init: function(options, callback) {
                 this.options = options;
                 create(options, callback);
                 return this;
             },
-            show: function (msg) {
+            show: function(msg) {
                 show(this.options, msg);
             },
-            close: function () {
+            close: function() {
                 close(this.options);
             }
         }
@@ -585,8 +643,8 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 /*#endregion*/
 
 /*#region myConfirm*/
-(function ($) {
-    $.myConfirm = function (msg, yesCallback, noCallback, options) {
+(function($) {
+    $.myConfirm = function(msg, yesCallback, noCallback, options) {
         var defaults = {
             self_bgFrame: null, //背景层
             self: null, //dialog dom
@@ -603,21 +661,22 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function create(msg, yesCallback, noCallback, options) {
         var tmp1 = '<div class="ui_alert2_bgframe"></div>';
         var tmp2 = '<div class="ui_alert2">' +
-                        '<div class="ui_alert2_top">' +
-                            '<label class="ui_alert2_title_txt" data-type="title">询问</label>' +
-                        '</div>' +
-                        '<div class="ui_alert2_body"></div>' +
-                        '<div class="ui_alert2_bottom">' +
-                            '<button type="button" class="ui_alert2_yes" data-type="yes">是</button>' +
-                            '<button type="button" class="ui_alert2_no" data-type="no">否</button>' +
-                        '</div>' +
-                   '</div>';
+            '<div class="ui_alert2_top">' +
+            '<label class="ui_alert2_title_txt" data-type="title">询问</label>' +
+            '</div>' +
+            '<div class="ui_alert2_body"></div>' +
+            '<div class="ui_alert2_bottom">' +
+            '<button type="button" class="ui_alert2_yes" data-type="yes">是</button>' +
+            '<button type="button" class="ui_alert2_no" data-type="no">否</button>' +
+            '</div>' +
+            '</div>';
 
         var op = options;
         var win = window;
         options.self_bgFrame = $(tmp1).appendTo(win.document.body);
         options.self = $(tmp2).appendTo(win.document.body);
-        if (!win.myTopLayoutIndex) win.myTopLayoutIndex = 100; else win.myTopLayoutIndex = win.myTopLayoutIndex + 1;
+        if (!win.myTopLayoutIndex) win.myTopLayoutIndex = 100;
+        else win.myTopLayoutIndex = win.myTopLayoutIndex + 1;
         options.self_bgFrame.css("z-index", win.myTopLayoutIndex);
         options.self.css("z-index", win.myTopLayoutIndex);
 
@@ -640,13 +699,13 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         $(title).html(options.title);
 
         var btnYes = $(footbar).find("[data-type='yes']")[0];
-        $(btnYes).click(function () {
+        $(btnYes).click(function() {
             if (yesCallback != null && yesCallback != undefined)
                 yesCallback();
             close(options);
         });
         var btnNo = $(footbar).find("[data-type='no']")[0];
-        $(btnNo).click(function () {
+        $(btnNo).click(function() {
             if (noCallback != null && noCallback != undefined)
                 noCallback();
             close(options);
@@ -663,8 +722,8 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         var body = options.self.children("DIV")[1];
         $(body).html(msg);
 
-        var x = ($(win).width() - options.width*2) / 2;
-        var y = ($(win).height() - options.height*2) / 2;
+        var x = ($(win).width() - options.width * 2) / 2;
+        var y = ($(win).height() - options.height * 2) / 2;
         $(options.self).css("left", x + "px");
         $(options.self).css("top", y + "px");
 
@@ -680,15 +739,15 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     function createPlugin() {
         return {
             options: null,
-            init: function (msg, yesCallback, noCallback, options) {
+            init: function(msg, yesCallback, noCallback, options) {
                 this.options = options;
                 create(msg, yesCallback, noCallback, options);
                 return this;
             },
-            show: function (msg) {
+            show: function(msg) {
                 show(this.options, msg);
             },
-            close: function () {
+            close: function() {
                 close(this.options);
             }
         }
@@ -697,8 +756,8 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 /*#endregion*/
 
 /*#region myUpload */
-(function ($) {
-    $.myUpload = function (options) {
+(function($) {
+    $.myUpload = function(options) {
         var defaults = {
             method: 'POST',
             dataType: "json",
@@ -707,9 +766,9 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
             requestHeaders: {}, //{'upload': 'ajax-reqeust'}
             progressbar: null,
             xhr: null,
-            success: function (obj) { },
-            error: function (statusText) { },
-            progress: function (loaded, total) { }
+            success: function(obj) {},
+            error: function(statusText) {},
+            progress: function(loaded, total) {}
         };
         for (var i in options) {
             defaults[i] = options[i];
@@ -725,11 +784,17 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         else
             xhr = new ActiveXObject("Microsoft.XMLHTTP");
         options.xhr = xhr;
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             switch (xhr.readyState) {
-                case 1: loading(options); break;
-                case 2: loaded(options); break;
-                case 3: interactive(options); break;
+                case 1:
+                    loading(options);
+                    break;
+                case 2:
+                    loaded(options);
+                    break;
+                case 3:
+                    interactive(options);
+                    break;
                 case 4:
                     complete(options, xhr.status, xhr.statusText, xhr.responseText, xhr.responseXML);
                     break;
@@ -737,7 +802,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         };
 
         if (xhr.upload && options.progress) {
-            xhr.upload.addEventListener('progress', function (e) {
+            xhr.upload.addEventListener('progress', function(e) {
                 options.progress(e.loaded, e.total);
             }, false);
         }
@@ -765,7 +830,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         $(input).css("display", "none");
         var form = $(document.body).find("form")[0];
         $(form).append(input);
-        $(input).change(function (e) {
+        $(input).change(function(e) {
             var files = this.files;
             if (files.length > 0) {
                 send(options, files[0]);
@@ -814,22 +879,22 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
         options.progressbar = $.myLoading();
     }
 
-    function loaded(options) { }
+    function loaded(options) {}
 
-    function interactive(options) { }
+    function interactive(options) {}
 
     function createPlugin() {
         return {
             options: null,
-            init: function (options) {
+            init: function(options) {
                 this.options = options;
                 create(this.options);
                 return this;
             },
-            setUrl: function (url) {
+            setUrl: function(url) {
                 this.options.url = url;
             },
-            upload: function () {
+            upload: function() {
                 upload(this.options);
             }
         }
@@ -838,11 +903,11 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 /*#endregion */
 
 /*#region helpers */
-(function (window, undefined) {
+(function(window, undefined) {
     var helpers = {
         /*#region json */
         json: {
-            parse: function (str) {
+            parse: function(str) {
                 /// <summary>把json字符串转为对象</summary>
                 /// <param name="str">json字符串</param>
                 //过滤日期,把.net返回的\Date()\转为 new Date(),自动生成时间对象
@@ -850,7 +915,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
                 return eval("(" + s + ")");
             },
-            parseToDate: function (str) {
+            parseToDate: function(str) {
                 /// <summary>把/Date(1391184000000)\转为Date</summary>
                 /// <param name="str">json字符串</param>
                 str = "new " + str.replace("/", "").replace("/", "");
@@ -861,20 +926,20 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region cookie */
         cookie: {
-            set: function (name, value, hour) {
+            set: function(name, value, hour) {
                 if (hour != undefined && hour != null) {
                     var exp = new Date();
                     exp.setTime(exp.getTime() + hour * 60 * 60 * 1000);
                     window.document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-                }
-                else
+                } else
                     window.document.cookie = name + "=" + escape(value);
             },
-            get: function (name) {
+            get: function(name) {
                 var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-                if (arr != null) return unescape(arr[2]); return null;
+                if (arr != null) return unescape(arr[2]);
+                return null;
             },
-            del: function (name) {
+            del: function(name) {
                 var exp = new Date();
                 exp.setTime(exp.getTime() - 1);
                 var cval = helpers.cookie.get(name);
@@ -885,15 +950,15 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region checkbox */
         checkbox: {
-            isChecked: function (elem) {
-                if (typeof (elem) == "string" && elem.constructor == String)
+            isChecked: function(elem) {
+                if (typeof(elem) == "string" && elem.constructor == String)
                     return $("#" + elem).is(":checked");
                 else
                     return $(elem).is(":checked");
             },
-            checked: function (elem, isChecked) {
+            checked: function(elem, isChecked) {
                 var obj;
-                if (typeof (elem) == "string" && elem.constructor == String)
+                if (typeof(elem) == "string" && elem.constructor == String)
                     obj = $("#" + elem);
                 else
                     obj = $(elem);
@@ -910,12 +975,12 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region radio */
         radio: {
-            getValue: function (name) {
+            getValue: function(name) {
                 /// <summary>获取radio选中项的value</summary>
                 /// <param name="name" type="String">元素name属性</param>
                 return $("input[name='" + name + "']:checked").val();
             },
-            setValue: function (name, value) {
+            setValue: function(name, value) {
                 var rs = $("input[name='" + name + "']");
                 for (var i = 0; i < rs.length; i++) {
                     if ($(rs[i]).val() == value)
@@ -929,55 +994,59 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region select */
         select: {
-            selectedText: function (elem) {
+            selectedText: function(elem) {
                 /// <summary>获取select元素当前选中的文本</summary>
                 /// <param name="elem" type="String/Object">元素ID或对象</param>
                 /// <returns type="String" />
                 var obj;
-                if (typeof (elem) == "string" && elem.constructor == String)
+                if (typeof(elem) == "string" && elem.constructor == String)
                     obj = $("#" + elem);
                 else
                     obj = $(elem);
                 return obj.find("option:selected").text();
             },
-            selectedIndex: function (elem) {
+            selectedIndex: function(elem) {
                 /// <summary>获取select元素当前选中的索引</summary>
                 /// <param name="elem" type="String/Object">元素ID或对象</param>
                 /// <returns type="Int" />
-                if (typeof (elem) == "string" && elem.constructor == String)
+                if (typeof(elem) == "string" && elem.constructor == String)
                     return document.getElementById(elem).selectedIndex;
                 else
                     return elem.selectedIndex;
             },
-            val: function (elem, value, invokeOnchange) {
+            val: function(elem, value, invokeOnchange) {
                 /// <summary>设置select的值</summary>
                 /// <param name="elem" type="String/Object">元素ID或对象</param>
                 /// <param name="value">值</param>
                 var e;
-                if (typeof (elem) == "string" && elem.constructor == String)
+                if (typeof(elem) == "string" && elem.constructor == String)
                     e = $("#" + elem);
                 else
                     e = $(elem);
                 e.val(value);
             },
-            selectedIntValue: function (elem) {
+            selectedIntValue: function(elem) {
                 /// <summary>获取select元素当前选中的Int值</summary>
                 /// <param name="elem" type="String/Object">元素ID或对象</param>
                 /// <returns type="Int" />
-                if (typeof (elem) == "string" && elem.constructor == String)
-                    if (document.getElementById(elem).selectedIndex == -1) return 0; else return parseInt($("#" + elem).val());
+                if (typeof(elem) == "string" && elem.constructor == String)
+                    if (document.getElementById(elem).selectedIndex == -1) return 0;
+                    else return parseInt($("#" + elem).val());
                 else
-                    if (elem.selectedIndex == -1) return 0; else return parseInt($(elem).val());
+                if (elem.selectedIndex == -1) return 0;
+                else return parseInt($(elem).val());
             },
-            selectedValue: function (elem) {
+            selectedValue: function(elem) {
                 /// <summary>获取select元素当前选中的值</summary>
                 /// <param name="elem">元素ID或对象</param>
-                if (typeof (elem) == "string" && elem.constructor == String)
-                    if (document.getElementById(elem).selectedIndex == -1) return ""; else return $("#" + elem).val();
+                if (typeof(elem) == "string" && elem.constructor == String)
+                    if (document.getElementById(elem).selectedIndex == -1) return "";
+                    else return $("#" + elem).val();
                 else
-                    if (elem.selectedIndex == -1) return ""; else return $(elem).val();
+                if (elem.selectedIndex == -1) return "";
+                else return $(elem).val();
             },
-            bind: function (data, elem, displayField, valueField, defaultValue) {
+            bind: function(data, elem, displayField, valueField, defaultValue) {
                 /// <summary>把数据集绑定到select元素的option上</summary>
                 /// <param name="data" type="Array">数据源</param>
                 /// <param name="elem" type="String|Object">元素ID或对象</param>
@@ -985,13 +1054,13 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 /// <param name="valueField" type="String">值属性</param>
                 /// <param name="defaultValue">默认值，可以不填</param>
                 var obj;
-                if (typeof (elem) == "string" && elem.constructor == String)
+                if (typeof(elem) == "string" && elem.constructor == String)
                     obj = $("#" + elem);
                 else
                     obj = $(elem);
 
                 obj.empty();
-                $.each(data, function (i, n) {
+                $.each(data, function(i, n) {
                     obj.append("<option value='" + String(n[valueField]) + "'>" + n[displayField] + "</option>");
                 });
                 if (defaultValue != undefined) {
@@ -999,13 +1068,13 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                     if (obj.attr("selectedIndex") != -1) obj.change();
                 }
             },
-            bindFromArray: function (data, elem, defaultValue) {
+            bindFromArray: function(data, elem, defaultValue) {
                 /// <summary>把数据集绑定到select元素的option上</summary>
                 /// <param name="data" type="Array">数据源</param>
                 /// <param name="elem" type="String|Object">元素ID或对象</param>
                 /// <param name="defaultValue">默认值，可以不填</param>
                 var obj;
-                if (typeof (elem) == "string" && elem.constructor == String)
+                if (typeof(elem) == "string" && elem.constructor == String)
                     obj = $("#" + elem);
                 else
                     obj = $(elem);
@@ -1024,7 +1093,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region array */
         array: {
-            indexOfByKeys: function (keys, values, arr) {
+            indexOfByKeys: function(keys, values, arr) {
                 /// <summary>查找键值在数组中的位置</summary>
                 /// <param name="keys" type="Array">键数组</param>
                 /// <param name="values" type="Array">值分组</param>
@@ -1049,7 +1118,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region value */
         value: {
-            isInt: function (v) {
+            isInt: function(v) {
                 /// <summary>获取值是否为整数</summary>
                 /// <param name="v" type="String">值</param>
                 /// <returns type="Boolean" />
@@ -1060,7 +1129,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
                 return true;
             },
-            isNumber: function (v) {
+            isNumber: function(v) {
                 /// <summary>获取值是否为数字</summary>
                 /// <param name="v" type="String">值</param>
                 /// <returns type="Boolean" />
@@ -1068,7 +1137,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 var ex = /^\-{0,1}(?:[0-9]+){0,1}(?:\.[0-9]+){0,1}$/i;
                 return ex.test(v);
             },
-            isDate: function (v) {
+            isDate: function(v) {
                 /// <summary>获取值是否为日期</summary>
                 /// <param name="v" type="String">值</param>
                 /// <returns type="Boolean" />
@@ -1082,7 +1151,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 if (d.getDate() != r[3]) return false;
                 return true;
             },
-            isDateTime: function (v) {
+            isDateTime: function(v) {
                 /// <summary>获取值是否为时间</summary>
                 /// <param name="v" type="String">值</param>
                 /// <returns type="Boolean" />
@@ -1100,19 +1169,19 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 if (d.getSeconds() != r[6]) return false;
                 return true;
             },
-            isFunction: function (f) {
+            isFunction: function(f) {
                 /// <summary>判断是否为函数</summary>
                 /// <param name="f" type="Function">函数体</param>
-                return typeof (f) == "function";
+                return typeof(f) == "function";
             },
-            includeInt: function (s) {
+            includeInt: function(s) {
                 var s1 = "0123456789";
                 for (var i = 0; i < s.length; i++)
                     if (s1.indexOf(s.substr(i, 1)) != -1) return true;
 
                 return false;
             },
-            is26Char: function (s) {
+            is26Char: function(s) {
                 var s1 = "abcdefghijklmnopqrstuvwxyz";
                 var s2 = s.toLowerCase();
                 for (var i = 0; i < s2.length; i++)
@@ -1120,13 +1189,13 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
                 return false;
             },
-            isOperend: function (s) {
+            isOperend: function(s) {
                 var s1 = "~!@#$%^&*()_=-+{}\[]'|";
                 for (var i = 0; i < s.length; i++)
                     if (s1.indexOf(s.substr(i, 1)) != -1) return true;
                 return false;
             },
-            formatDate: function (v, format) {
+            formatDate: function(v, format) {
                 /// <summary>格式化时间</summary>
                 /// <param name="v" type="Date">时间的值，可能为null</param>
                 /// <param name="format" type="String">格式化字符串</param>
@@ -1137,14 +1206,14 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 else
                     return v;
             },
-            getDate: function (date) {
+            getDate: function(date) {
                 /// <summary>获取当前系统日期，不包含时间</summary>
                 /// <param name="date" type="Date">时间，不填时默认为new Date()</param>
                 /// <returns type="Date" />
                 if (date == undefined) date = new Date();
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0);
             },
-            stringToDate: function (str) {
+            stringToDate: function(str) {
                 /// <summary>把字符串转为Date类型</summary>
                 /// <param name="str"></param>
                 /// <returns type="Date" />
@@ -1156,14 +1225,13 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 else
                     return null;
             },
-            daysOfMonth: function () {
+            daysOfMonth: function() {
                 /// <summary>获取一个月的天数(两种参数，1:日期，2:年、月[0 到 11 之间])</summary>
                 var year, month;
                 if (arguments.length == 1) {
                     year = arguments[0].getFullYear();
                     month = arguments[0].getMonth();
-                }
-                else {
+                } else {
                     year = arguments[0];
                     month = arguments[1];
                 }
@@ -1172,34 +1240,32 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 if ((new Date(year, month, 31)).getMonth() != month) return 30;
                 return 31;
             },
-            firstDateOfMonth: function () {
+            firstDateOfMonth: function() {
                 /// <summary>获取一个月的第一天(两种参数，1:日期，2:年、月[0 到 11 之间])</summary>
                 var year, month;
                 if (arguments.length == 1) {
                     year = arguments[0].getFullYear();
                     month = arguments[0].getMonth();
-                }
-                else {
+                } else {
                     year = arguments[0];
                     month = arguments[1];
                 }
                 return new Date(year, month, 1);
             },
-            lastDateOfMonth: function () {
+            lastDateOfMonth: function() {
                 /// <summary>获取一个月的最后一天(两种参数，1:日期，2:年、月[0 到 11 之间])</summary>
                 var year, month;
                 if (arguments.length == 1) {
                     year = arguments[0].getFullYear();
                     month = arguments[0].getMonth();
-                }
-                else {
+                } else {
                     year = arguments[0];
                     month = arguments[1];
                 }
                 var days = helpers.value.daysOfMonth(year, month);
                 return new Date(year, month, days);
             },
-            textWidth: function (text, container) {
+            textWidth: function(text, container) {
                 /// <summary>计算文本宽度</summary>
                 /// <param name="text"></param>
                 /// <param name="container">文本容器</param>
@@ -1216,10 +1282,10 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region page */
         page: {
-            getPath: function () {
+            getPath: function() {
                 return location.pathname;
             },
-            getQueryString: function () {
+            getQueryString: function() {
                 var result = location.search.match(new RegExp("[\?\&][^\?\&]+=[^\?\&]+", "g"));
                 if (result == null) return "";
 
@@ -1228,58 +1294,74 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 }
                 return result;
             },
-            getQueryStringByName: function (name) {
+            getQueryStringByName: function(name) {
                 var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
                 if (result == null || result.length < 1)
                     return "";
                 else
                     return result[1];
             },
-            getQueryIntByName: function (name) {
+            getQueryIntByName: function(name) {
                 var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
                 if (result == null || result.length < 1)
                     return 0;
                 else
                     return parseInt(result[1]);
             },
-            getQueryFloatByName: function (name) {
+            getQueryFloatByName: function(name) {
                 var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
                 if (result == null || result.length < 1)
                     return 0.00;
                 else
                     return parseFloat(result[1]);
             },
-            htmlEncode: function (value) {
+            htmlEncode: function(value) {
                 var o = $('<div/>');
                 var s = o.text(value).html();
                 o.remove();
                 return s;
             },
-            htmlDecode: function (value) {
+            htmlDecode: function(value) {
                 var o = $('<div/>');
                 var s = o.html(value).text();
                 o.remove();
                 return s;
             },
-            textToHtml: function (txt) {
+            textToHtml: function(txt) {
                 if (txt == null || txt == undefined) return "";
                 var s = "";
                 for (var i = 0; i < txt.length; i++) {
                     var c = txt.substr(i, 1);
                     switch (c) {
-                        case "\n": s += "<br/>"; break;
-                        case " ": s += "&nbsp;"; break;
-                        case "<": s += "&lt;"; break;
-                        case ">": s += "&gt;"; break;
-                        case "\"": s += "&quot;"; break;
-                        case "©": s += "&copy;"; break; //版权
-                        case "®": s += "&reg;"; break; //已注册商标
-                        default: s += c; break;
+                        case "\n":
+                            s += "<br/>";
+                            break;
+                        case " ":
+                            s += "&nbsp;";
+                            break;
+                        case "<":
+                            s += "&lt;";
+                            break;
+                        case ">":
+                            s += "&gt;";
+                            break;
+                        case "\"":
+                            s += "&quot;";
+                            break;
+                        case "©":
+                            s += "&copy;";
+                            break; //版权
+                        case "®":
+                            s += "&reg;";
+                            break; //已注册商标
+                        default:
+                            s += c;
+                            break;
                     }
                 }
                 return s;
             },
-            htmlToText: function (html) {
+            htmlToText: function(html) {
                 var t = html.replace(/<style([\s\S]*?)<\/style>/gi, '');
                 var t = html.replace(/<script([\s\S]*?)<\/script>/gi, '');
                 t = html.replace(/<[^>]+>/gi, "");
@@ -1295,14 +1377,14 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region ui */
         ui: {
-            alert: function (msg, callback) {
+            alert: function(msg, callback) {
                 $.myAlert(msg, {}, callback);
             },
-            confirm: function (msg, onYesCallback, onNoCallback) {
+            confirm: function(msg, onYesCallback, onNoCallback) {
                 $.myConfirm(msg, onYesCallback, onNoCallback, {});
             },
-            prompt: function (e, msg) {
-                if (typeof (e) == "string")
+            prompt: function(e, msg) {
+                if (typeof(e) == "string")
                     e = window.document.getElementById(e);
                 $(e).html(msg);
                 $(e).show("fast");
@@ -1310,43 +1392,43 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                 var l = msg.length * 2;
                 l = Math.min(Math.max(l, 4), 60); //最长1分钟，最短4秒
 
-                setTimeout(function () { $(e).hide("fast") }, l * 1000);
+                setTimeout(function() { $(e).hide("fast") }, l * 1000);
             },
-            alertBar: function (msg) {
+            alertBar: function(msg) {
                 var e = $("<div class='alertBar'>" + msg + "</div>");
                 $(window.document.body).append(e);
 
                 var l = msg.length * 0.4;
                 l = Math.min(Math.max(l, 4), 60); //最长60秒，最短3秒
 
-                setTimeout(function () { $(e).remove(); }, l * 1000);
+                setTimeout(function() { $(e).remove(); }, l * 1000);
             },
-            alertHtml: function (msg, id) {
+            alertHtml: function(msg, id) {
                 var e = $("<i class='alertHtml'>" + msg + "</i>");
                 $("#" + id).append(e);
 
                 var l = msg.length * 0.4;
                 l = Math.min(Math.max(l, 4), 30); //最长30秒，最短3秒
-                setTimeout(function () { $(e).remove(); }, l * 1000);
+                setTimeout(function() { $(e).remove(); }, l * 1000);
             },
-            disabled: function (args) {
+            disabled: function(args) {
                 /// <summary>禁用元素</summary>
                 /// <param name="args">对象数组或对象ID数组</param>
                 for (var i = 0; i < arguments.length; i++) {
                     var obj;
-                    if (typeof (arguments[i]) == "string")
+                    if (typeof(arguments[i]) == "string")
                         obj = $("#" + arguments[i]);
                     else
                         obj = $(arguments[i]);
                     obj.prop("disabled", true);
                 }
             },
-            enabled: function (args) {
+            enabled: function(args) {
                 /// <summary>启用元素</summary>
                 /// <param name="args">对象数组或对象ID数组</param>
                 for (var i = 0; i < arguments.length; i++) {
                     var obj;
-                    if (typeof (arguments[i]) == "string")
+                    if (typeof(arguments[i]) == "string")
                         obj = $("#" + arguments[i]);
                     else
                         obj = $(arguments[i]);
@@ -1358,7 +1440,7 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
 
         /*#region common */
         common: {
-            clone: function (o) {
+            clone: function(o) {
                 /// <summary>克隆(深层复制)</summary>
                 /// <param name="o" type="Object Array">克隆对象</param>
                 /// <returns type="Object Array" />
@@ -1367,13 +1449,12 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                     var i = o.length;
                     while (i--) buf[i] = arguments.callee(o[i]);
                     return buf;
-                }
-                else {
+                } else {
                     // true：深层复制（一层一层往下复制直到最底层）             
                     return $.extend(true, {}, o);
                 }
             },
-            copy: function (o) {
+            copy: function(o) {
                 /// <summary>复制(浅复制,只复制一层)</summary>
                 /// <param name="o" type="Object Array">复制对象</param>
                 /// <returns type="Object Array" />
@@ -1382,12 +1463,11 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                     var i = o.length;
                     while (i--) buf[i] = arguments.callee(o[i]);
                     return buf;
-                }
-                else {
+                } else {
                     return $.extend({}, o);
                 }
             },
-            type: function (o) {
+            type: function(o) {
                 /// <summary>获取对象的类型</summary>
                 /// <param name="o" type="Object">对象</param>
                 var _types = {
@@ -1401,28 +1481,28 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
                     '[object Date]': 'date',
                     '[object Error]': 'error'
                 };
-                return _types[typeof (o)] || _types[Object.prototype.toString.call(o)] || (o ? 'object' : 'null');
+                return _types[typeof(o)] || _types[Object.prototype.toString.call(o)] || (o ? 'object' : 'null');
             },
-            isNullOrEmpty: function (o) {
+            isNullOrEmpty: function(o) {
                 /// <summary>判断字符串是否为空值</summary>
                 /// <param name="o" type="String">对象</param>
                 /// <returns type="Boolean" />
-                var t = typeof (o);
+                var t = typeof(o);
                 return (t == "undefined") || (t == "string" && t == "") || (t == "object" && t == null);
             },
-            isEmptyObject: function (obj) {
+            isEmptyObject: function(obj) {
                 /// <summary>判断对象是否为空值</summary>
                 /// <param name="o" type="Object Array">对象</param>
                 /// <returns type="Boolean" />
                 for (var o in obj) return false;
                 return true;
             },
-            hasAttr: function (o, attr) {
+            hasAttr: function(o, attr) {
                 /// <summary>判断对象是否存在某个属性</summary>
                 /// <param name="o" type="Object">对象</param>
                 /// <param name="attr" type="String">属性名称</param>
                 /// <returns type="Boolean" />
-                return typeof (obj.attr(attr)) != "undefined";
+                return typeof(obj.attr(attr)) != "undefined";
             }
         },
         /*#endregion common */
@@ -1431,3 +1511,270 @@ console.log(newDate.format('yyyy-MM-dd h:m:s'));
     window.helpers = helpers;
 })(window);
 /*#endregion */
+
+
+#
+函数声明提升
+Js代码分为两个阶段： 编译阶段和执行阶段
+
+Js代码的编译阶段会找到所有的声明， 并用合适的作用域将它们关联起来， 这是词法作用域的核心内容
+
+包括变量声明(var a) 和函数声明(function a() {}) 在内的所有声明都会在代码被执行前的编译阶段首先被处理
+
+
+
+过程就好像变量声明和函数声明从他们代码中出现的位置被移动到执行环境的顶部， 这个过程就叫做提升
+
+只有声明操作会被提升， 赋值和逻辑操作会被留在原地等待执行
+
+// 判断是否为手机号  
+isPoneAvailable: function(pone) {
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(pone)) {
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+
+    // 正则
+    1 数字： ^ [0 - 9] * $
+
+2 n位的数字： ^ \d { n } $
+
+3 至少n位的数字： ^ \d { n, } $
+
+4 m - n位的数字： ^ \d { m, n } $
+
+5 零和非零开头的数字： ^ (0 | [1 - 9][0 - 9] * ) $
+
+6 非零开头的最多带两位小数的数字： ^ ([1 - 9][0 - 9] * ) + (.[0 - 9] { 1, 2 }) ? $
+
+7 带1 - 2 位小数的正数或负数： ^ (\-) ? \d + (\.\d { 1, 2 }) ? $
+
+8 正数、 负数、 和小数： ^ (\- | \+) ? \d + (\.\d + ) ? $
+
+9 有两位小数的正实数： ^ [0 - 9] + (.[0 - 9] { 2 }) ? $
+
+10 有1~3 位小数的正实数： ^ [0 - 9] + (.[0 - 9] { 1, 3 }) ? $
+
+11 非零的正整数： ^ [1 - 9]\ d * $ 或 ^ ([1 - 9][0 - 9] * ) { 1, 3 } $ 或 ^ \+ ? [1 - 9][0 - 9] * $
+
+12 非零的负整数： ^ \-[1 - 9][] 0 - 9 "*$ 或 ^-[1-9]\d*$
+
+13 非负整数： ^ \d + $ 或 ^ [1 - 9]\ d * | 0 $
+
+14 非正整数： ^ -[1 - 9]\ d * | 0 $ 或 ^ ((-\d + ) | (0 + )) $
+
+15 非负浮点数： ^ \d + (\.\d + ) ? $ 或 ^ [1 - 9]\ d * \.\d * | 0\.\d * [1 - 9]\ d * | 0 ? \.0 + | 0 $
+
+16 非正浮点数： ^ ((-\d + (\.\d + ) ? ) | (0 + (\.0 + ) ? )) $ 或 ^ (-([1 - 9]\ d * \.\d * | 0\.\d * [1 - 9]\ d * )) | 0 ? \.0 + | 0 $
+
+17 正浮点数： ^ [1 - 9]\ d * \.\d * | 0\.\d * [1 - 9]\ d * $ 或 ^ (([0 - 9] + \.[0 - 9] * [1 - 9][0 - 9] * ) | ([0 - 9] * [1 - 9][0 - 9] * \.[0 - 9] + ) | ([0 - 9] * [1 - 9][0 - 9] * )) $
+
+18 负浮点数： ^ -([1 - 9]\ d * \.\d * | 0\.\d * [1 - 9]\ d * ) $ 或 ^ (-(([0 - 9] + \.[0 - 9] * [1 - 9][0 - 9] * ) | ([0 - 9] * [1 - 9][0 - 9] * \.[0 - 9] + ) | ([0 - 9] * [1 - 9][0 - 9] * ))) $
+
+19 浮点数： ^ (- ? \d + )(\.\d + ) ? $ 或 ^ - ? ([1 - 9]\ d * \.\d * | 0\.\d * [1 - 9]\ d * | 0 ? \.0 + | 0) $
+
+
+
+// Web Workers start
+var w;
+
+function startWorker() {
+    if (typeof(Worker) !== "undefined") {
+        if (typeof(w) == "undefined") {
+            w = new Worker("demo_workers.js");
+        }
+        w.onmessage = function(event) {
+            document.getElementById("result").innerHTML = event.data;
+        };
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser
+        does not support Web Workers...";
+    }
+}
+
+function stopWorker() {
+    w.terminate();
+}
+// Web Workers end
+
+
+// window 失去焦点，停止输出
+window.onblur = function() {};
+// window 每次获得焦点
+window.onfocus = function() {}
+
+
+
+
+
+var ua = window.navigator.userAgent;
+
+
+
+
+
+
+
+//javascript通过navigator.userAgent识别各种浏览器
+function userBrowser() {
+    var browserName = navigator.userAgent.toLowerCase();
+
+    console.log(browserName);
+    if (/msie/i.test(browserName) && !/opera/.test(browserName)) {
+        alert("IE");
+        return;
+    } else if (/firefox/i.test(browserName)) {
+        alert("Firefox");
+        return;
+    } else if (/wxwork/i.test(browserName)) {
+        alert("wxwork");
+        return;
+    } else if (/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName)) {
+        alert("Chrome");
+        return;
+    } else if (/opera/i.test(browserName)) {
+        alert("Opera");
+        return;
+    } else if (/webkit/i.test(browserName) && !(/chrome/i.test(browserName) && /webkit/i.test(browserName) && /mozilla/i.test(browserName))) {
+        alert("Safari");
+        return;
+    } else {
+        alert("unKnow");
+    }
+}
+
+// 倒计时
+// html
+<
+div id = "J-countdown" >
+    <
+    span id = "day" > < /span> <
+span id = "hour" > < /span> <
+span id = "min" > < /span> <
+span id = "sec" > < /span> < /
+div >
+    // js
+
+    function ShowCountDown(year, month, day, hour, min, sec, divname) {
+        var now = new Date();
+        var endDate = new Date(year, month - 1, day, hour, min, sec);
+        var leftTime = endDate.getTime() - now.getTime();
+        var leftsecond = parseInt(leftTime / 1000);
+        //var day1=parseInt(leftsecond/(24*60*60*6)); 
+        var day1 = Math.floor(leftsecond / (60 * 60 * 24));
+        var hour = Math.floor((leftsecond - day1 * 24 * 60 * 60) / 3600);
+        var minute = Math.floor((leftsecond - day1 * 24 * 60 * 60 - hour * 3600) / 60);
+        var second = Math.floor(leftsecond - day1 * 24 * 60 * 60 - hour * 3600 - minute * 60);
+        var cc = document.getElementById(divname);
+        var oDay = document.getElementById('day');
+        var oHour = document.getElementById('hour');
+        var oMin = document.getElementById('min');
+        var oSec = document.getElementById('sec');
+        oDay.innerHTML = day1;
+        oHour.innerHTML = hour;
+        oMin.innerHTML = minute;
+        oSec.innerHTML = second;
+        // cc.innerHTML = "脚本之家提示距离" + year + "年" + month + "月" + day + "日还有：" + day1 + "天" + hour + "小时" + minute + "分" + second + "秒";
+        oMin.innerHTML = minute;
+    }
+window.onload = function() {
+    window.setTimeout(function() {
+        ShowCountDown(2018, 3, 27, 15, 0, 0, 'J-countdown');
+    }, 0);
+}
+window.setInterval(function() {
+    ShowCountDown(2018, 3, 27, 15, 0, 0, 'J-countdown');
+}, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 阻止浏览器关闭
+window.onbeforeunload = function(event) {
+        return '关闭本窗口即放弃考试！';
+    }
+
+
+    //倒数
+
+    <
+    div id = "timer"
+style = "color:red" > < /div> <
+div id = "warring"
+style = "color:red" > < /div>
+var maxtime = 50 * 60; //一个小时，按秒计算，自己调整!   
+function CountDown() {
+    if (maxtime >= 0) {
+        minutes = Math.floor(maxtime / 60);
+        seconds = Math.floor(maxtime % 60);
+        msg = "距离结束还有" + minutes + "分" + seconds + "秒";
+        document.all["timer"].innerHTML = msg;
+        if (maxtime == 5 * 60) alert("还剩5分钟");
+        --maxtime;
+    } else {
+        clearInterval(timer);
+        alert("时间到，结束!");
+    }
+}
+window.onload = function() {
+    setTimeout("CountDown()", 0);
+}
+timer = setInterval("CountDown()", 1000);
+
+
+
+// 到一天中的什么时间才去做事情
+var curDate = new Date(),
+    iCurYear = curDate.getFullYear(),
+    iCurMonth = curDate.getMonth(),
+    iCurDate = curDate.getDate(),
+    iTargetTime = new Date(iCurYear, iCurMonth, iCurDate, 12, 0, 0).getTime(),
+    icurTime = curDate.getTime();
+console.log(icurTime);
+console.log(iTargetTime);
+console.log(icurTime < iTargetTime);
+
+
+stopPropagation();
+
+
+// html拼接
+var oFragmeng = document.createDocumentFragment();
+for (var i = 0, len = resultA.length; i < len; i++) {
+    var index = (result.res[t].type == 'A') ? (i + 1) : (result.res[0].question.length + i + 1);
+
+    var sLi = '<li id="' + index + '" class="J-question"  data-id="' + resultA[i].id + '"><p class="title"><i>' + index + '.</i>' + resultA[i].question + '</p>';
+    for (var j = 0, aswLen = resultA[i].answer.length; j < aswLen; j++) {
+
+        if (result.res[t].type == 'A') {
+            sLi += '<label><input type="radio" name="' + resultA[i].id + '" value="' + resultA[i].answer[j].code + '">' + resultA[i].answer[j].content + '</label>';
+        } else if (result.res[t].type == 'B') {
+            sLi += '<label><input type="checkbox" name="' + resultA[i].id + '" value="' + resultA[i].answer[j].code + '">' + resultA[i].answer[j].content + '</label>';
+        }
+    }
+    sLi += '</li>';
+    oFragmeng.appendChild($(sLi)[0]);
+
+    // 输入间隔再请求接口
+
+    var timeoutAuto = 0;
+    clearTimeout(timeoutAuto);
+    timeoutAuto = setTimeout(function() {
+        //.....
+    }, 200);
