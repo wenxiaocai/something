@@ -183,6 +183,22 @@ input[type="number"] {
     border: none;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: #f53e14
+}
 
 /*居中*/
 
