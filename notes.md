@@ -1,3 +1,33 @@
+#npm report
+npm run build -- --report
+或者package.json  "report": "vue-cli-service build --mode preview --report"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+______________________________________________
 #搭建react-webpack (imooc.com 教程)
 
 npm install -g generator-react-webpack
